@@ -1,0 +1,8 @@
+version: '2'
+
+services:
+  php-fpm:
+    volumes:
+      - "./app:/var/www/html"
+      - "./docker/data/php-fpm/root/.composer/auth.json:/root/.composer/auth.json"
+    command: /bin/bash -c 'php-fpm'
