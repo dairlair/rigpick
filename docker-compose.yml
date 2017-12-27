@@ -24,3 +24,24 @@ services:
       file: docker-common-services.yml
       service: php-fpm
     build: ./docker/php-fpm
+    links:
+      - postgres
+
+  postgres:
+    image: postgres:9.6
+    ports:
+      - "${POSTGRES_PORT}:5432"
+    volumes:
+      - "./docker/data/postgres/pgdata:/var/lib/postgresql/data/pgdata"
+      - "./docker/data/postgres/dumps:/var/lib/postgresql/dumps"
+    environment:
+      POSTGRES_DB: $POSTGRES_DB
+      POSTGRES_USER: $POSTGRES_USER
+      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+      PGDATA: /var/lib/postgresql/data/pgdata
+
+  yarn:
+    image: kkarczmarczyk/node-yarn:8.0
+    volumes_from:
+      - php-fpm
+    working_dir: '/var/www/html'

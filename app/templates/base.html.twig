@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>{% block title %}RigPick{% endblock %}</title>
+        <link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <div class="container">
+            <a class="navbar-brand" href="#">RigPick</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Rigs</a>
+                    </li>
+                </ul>
+            </div>
+            </div>
+        </nav>
+
+        <div class="container">
+            <main role="main">
+                {% block content %}{% endblock %}
+            </main>
+        </div>
+
+        <footer>
+            <div class="container">
+
+            </div>
+        </footer>
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>
