@@ -1,4 +1,4 @@
-.PHONY: all build run php
+.PHONY: all build run composer
 
 all: build
 
@@ -8,5 +8,8 @@ build:
 run:
 	docker-compose up
 
-php: ## Run this command to start temporary container with php and use composer and other PHP tools.
+composer: ## Run this command to start temporary container with php and use composer and other PHP tools.
 	docker-compose run --rm php-fpm bash
+
+yarn: ## Run this command to start temporary container with php and use composer and other PHP tools.
+	docker-compose run --rm yarn bash
