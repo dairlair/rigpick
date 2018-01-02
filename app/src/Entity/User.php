@@ -50,6 +50,10 @@ class User implements UserInterface
     private $password;
 
     // other properties and methods
+    public function getId()
+    {
+        return $this->id;
+    }
 
     public function getEmail()
     {

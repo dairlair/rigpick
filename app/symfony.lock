@@ -56,8 +56,26 @@
     "doctrine/orm": {
         "version": "v2.6.0"
     },
+    "guzzlehttp/guzzle": {
+        "version": "6.3.0"
+    },
+    "guzzlehttp/promises": {
+        "version": "v1.3.1"
+    },
+    "guzzlehttp/psr7": {
+        "version": "1.4.2"
+    },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
+    },
+    "knpuniversity/oauth2-client-bundle": {
+        "version": "1.15.1"
+    },
+    "league/oauth2-client": {
+        "version": "2.2.1"
+    },
+    "league/oauth2-facebook": {
+        "version": "2.0.1"
     },
     "ocramius/package-versions": {
         "version": "1.2.0"
@@ -65,11 +83,17 @@
     "ocramius/proxy-manager": {
         "version": "2.2.0"
     },
+    "paragonie/random_compat": {
+        "version": "v2.0.11"
+    },
     "psr/cache": {
         "version": "1.0.1"
     },
     "psr/container": {
         "version": "1.0.0"
+    },
+    "psr/http-message": {
+        "version": "1.0.1"
     },
     "psr/log": {
         "version": "1.0.2"
