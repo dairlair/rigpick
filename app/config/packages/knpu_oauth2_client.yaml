@@ -1,8 +1,8 @@
 knpu_oauth2_client:
     clients:
-        # the key "facebook_main" can be anything, it
-        # will create a service: "knpu.oauth2.client.facebook_main"
-        facebook_main:
+        # the key "facebook" can be anything, it
+        # will create a service: "knpu.oauth2.client.facebook"
+        facebook:
             # this will be one of the supported types
             type: facebook
             client_id: 188254271765057

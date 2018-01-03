@@ -16,6 +16,9 @@ security:
             guard:
                 authenticators:
                     - App\Security\UserLoginFormAuthenticator
+                    - App\Security\FacebookSocialAuthenticator
+
+                entry_point: App\Security\UserLoginFormAuthenticator
             logout:
                 path: /logout
                 target: /

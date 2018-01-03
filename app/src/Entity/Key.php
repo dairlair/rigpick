@@ -31,7 +31,7 @@ class Key
     }
 
     /**
-     * @return mixed
+     * @return User
      */
     public function getUser()
     {

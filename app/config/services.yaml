@@ -24,9 +24,8 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
-    App\Services\Socializator:
-        arguments: ['@doctrine.orm.entity_manager']
-        public: true
-
     App\Security\UserLoginFormAuthenticator:
         arguments: ["@router", "@security.password_encoder"]
+
+    App\Security\FacebookSocialAuthenticator:
+        autowire: true

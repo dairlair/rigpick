@@ -77,7 +77,7 @@ class UserLoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
     protected function getDefaultSuccessRedirectUrl()
     {
-        return $this->router->generate('welcome');
+        return $this->router->generate('profile');
     }
 
     public function supports(Request $request)

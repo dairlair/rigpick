@@ -3,14 +3,23 @@
 namespace App\Controller;
 
 use App\Entity\Key;
-use App\Services\Socializator;
+use App\Security\UserLoginFormAuthenticator;
 use Symfony\Component\HttpFoundation\Request;
-use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 
 class FacebookController extends Controller
 {
+    private $guardAuthenticatorHandler;
+    private $userLoginFormAuthenticator;
+
+    public function __construct(GuardAuthenticatorHandler $guardAuthenticatorHandler, UserLoginFormAuthenticator $userLoginFormAuthenticator)
+    {
+        $this->guardAuthenticatorHandler = $guardAuthenticatorHandler;
+        $this->userLoginFormAuthenticator = $userLoginFormAuthenticator;
+    }
+
     /**
      * Link to this controller to start the "connect" process
      *
@@ -20,9 +29,8 @@ class FacebookController extends Controller
     {
         // Scopes that we need from facebook
         $scopes = ['public_profile', 'email'];
-        // will redirect to Facebook!
         return $this->get('oauth2.registry')
-            ->getClient('facebook_main') // key used in knpu_oauth2_client.yaml
+            ->getClient(Key::PROVIDER_FACEBOOK)
             ->redirect($scopes);
     }
 
@@ -32,30 +40,10 @@ class FacebookController extends Controller
      * in config.yml
      *
      * @Route("/connect/facebook/check", name="connect_facebook_check")
+     *
+     * @param Request $request
      */
     public function connectCheckAction(Request $request)
     {
-        // ** if you want to *authenticate* the user, then
-        // leave this method blank and create a Guard authenticator
-        // (read below)
-
-        /** @var \KnpU\OAuth2ClientBundle\Client\Provider\FacebookClient $client */
-        $client = $this->get('oauth2.registry')
-            ->getClient('facebook_main');
-
-        try {
-            // the exact class depends on which provider you're using
-            /** @var \League\OAuth2\Client\Provider\FacebookUser $user */
-            $resourceOwner = $client->fetchUser();
-
-            /** @var Socializator $socializator */
-            $socializator = $this->container->get(Socializator::class);
-            $user = $socializator->findOrCreate(Key::PROVIDER_FACEBOOK, $resourceOwner);
-
-        } catch (IdentityProviderException $e) {
-            // something went wrong!
-            // probably you should return the reason to the user
-            var_dump($e->getMessage());die;
-        }
     }
 }
