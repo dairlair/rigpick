@@ -20,7 +20,7 @@ class Socializator
         $this->em = $em;
     }
 
-    public function findOrCreate(string $provider, ResourceOwnerInterface $resourceOwner)
+    public function findOrCreate(string $provider, ResourceOwnerInterface $resourceOwner) : User
     {
         /** @var Key $key */
         $key = $this->em->getRepository(Key::class)->findOneBy([
@@ -33,25 +33,22 @@ class Socializator
         }
 
         // @TODO Wrap to transaction
-        $user = $this->createUser($provider, $resourceOwner);
+        $user = $this->createUser();
 
         $this->createKey($provider, $resourceOwner, $user);
 
         return $user;
     }
 
-    protected function createUser(string $provider, ResourceOwnerInterface $resourceOwner) : User
+    protected function createUser() : User
     {
         $user = new User();
-        $user->setUsername(md5(rand()));
-        $user->setEmail(md5(rand()) . '@gmail.com');
-        $user->setPassword('');
         $this->em->persist($user);
         $this->em->flush();
         return $user;
     }
 
-    protected function createKey(string $provider, ResourceOwnerInterface $resourceOwner, User $user)
+    protected function createKey(string $provider, ResourceOwnerInterface $resourceOwner, User $user) : void
     {
         $key = new Key($provider, $resourceOwner->getId());
         $key->setUser($user);

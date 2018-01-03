@@ -6,3 +6,8 @@
 /vendor/
 ###< symfony/framework-bundle ###
 /node_modules
+
+###> symfony/phpunit-bridge ###
+.phpunit
+/phpunit.xml
+###< symfony/phpunit-bridge ###

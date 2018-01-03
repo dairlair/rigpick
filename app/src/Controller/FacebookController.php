@@ -51,9 +51,7 @@ class FacebookController extends Controller
             /** @var Socializator $socializator */
             $socializator = $this->container->get(Socializator::class);
             $user = $socializator->findOrCreate(Key::PROVIDER_FACEBOOK, $resourceOwner);
-            var_dump($user->getId());
-            return '';
-            // ...
+
         } catch (IdentityProviderException $e) {
             // something went wrong!
             // probably you should return the reason to the user

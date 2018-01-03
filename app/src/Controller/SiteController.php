@@ -14,4 +14,14 @@ class SiteController extends Controller
     {
         return $this->render('site/index.html.twig');
     }
+
+    /**
+     * @Route("/profile", name="profile")
+     *
+     * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
+     */
+    public function profileAction()
+    {
+        return $this->render('site/profile.html.twig');
+    }
 }
