@@ -13,10 +13,16 @@ security:
             security: false
         main:
             anonymous: ~
+            guard:
+                authenticators:
+                    - App\Security\UserLoginFormAuthenticator
+            logout:
+                path: /logout
+                target: /
             form_login: ~
                 # https://symfony.com/doc/current/cookbook/security/form_login_setup.html
                 login_path:  login
-                check_path:  login
+                check_path:  loagin_check
 
     access_control:
       - { path: ^/profile, roles: IS_AUTHENTICATED_REMEMBERED }

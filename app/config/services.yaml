@@ -27,3 +27,6 @@ services:
     App\Services\Socializator:
         arguments: ['@doctrine.orm.entity_manager']
         public: true
+
+    App\Security\UserLoginFormAuthenticator:
+        arguments: ["@router", "@security.password_encoder"]

@@ -4,14 +4,25 @@ namespace App\Controller;
 
 use App\Form\UserType;
 use App\Entity\User;
+use App\Security\UserLoginFormAuthenticator;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
-class AuthController extends Controller
+class SecurityController extends Controller
 {
+    private $guardAuthenticatorHandler;
+    private $userLoginFormAuthenticator;
+
+    public function __construct(GuardAuthenticatorHandler $guardAuthenticatorHandler, UserLoginFormAuthenticator $userLoginFormAuthenticator)
+    {
+        $this->guardAuthenticatorHandler = $guardAuthenticatorHandler;
+        $this->userLoginFormAuthenticator = $userLoginFormAuthenticator;
+    }
+
     /**
      * @Route("/join", name="join")
      *
@@ -22,11 +33,12 @@ class AuthController extends Controller
      */
     public function joinAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
-        // 1) build the form
+
+        // Build the form
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
 
-        // 2) handle the submit (will only happen on POST)
+        // Handle the submit (will only happen on POST)
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -34,12 +46,18 @@ class AuthController extends Controller
             $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
             $user->setPassword($password);
 
-            // 4) save the User!
+            // 4) Save the user
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
 
-            return $this->redirectToRoute('profile');
+            return $this->guardAuthenticatorHandler
+                ->authenticateUserAndHandleSuccess(
+                    $user,
+                    $request,
+                    $this->userLoginFormAuthenticator,
+                    'db_provider'
+                );
         }
 
         return $this->render(
@@ -68,5 +86,21 @@ class AuthController extends Controller
             'last_username' => $lastUsername,
             'error'         => $error,
         ));
+    }
+
+    /**
+     * @Route("/login_check", name="security_login_check")
+     */
+    public function loginCheckAction()
+    {
+
+    }
+
+    /**
+     * @Route("/logout", name="logout")
+     */
+    public function logoutAction()
+    {
+
     }
 }
