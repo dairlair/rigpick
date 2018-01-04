@@ -6,6 +6,7 @@
         "ext-iconv": "*",
         "knpuniversity/oauth2-client-bundle": "^1.15",
         "league/oauth2-facebook": "^2.0",
+        "league/oauth2-google": "^2.0",
         "symfony/asset": "^4.0",
         "symfony/console": "^4.0",
         "symfony/debug-pack": "^1.0",

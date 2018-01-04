@@ -7,28 +7,28 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 
-class FacebookController extends Controller
+class GoogleController extends Controller
 {
     /**
      * Link to this controller to start the "connect" process
      *
-     * @Route("/connect/facebook", name="connect_facebook")
+     * @Route("/connect/google", name="connect_google")
      */
     public function connectAction()
     {
-        // Scopes that we need from facebook
-        $scopes = ['public_profile', 'email'];
+        // Scopes that we need from google
+        $scopes = ['profile', 'email'];
         return $this->get('oauth2.registry')
-            ->getClient(Key::PROVIDER_FACEBOOK)
+            ->getClient(Key::PROVIDER_GOOGLE)
             ->redirect($scopes);
     }
 
     /**
-     * After going to Facebook, you're redirected back here
+     * After going to Google, you're redirected back here
      * because this is the "redirect_route" you configured
      * in config.yml
      *
-     * @Route("/connect/facebook/check", name="connect_facebook_check")
+     * @Route("/connect/google/check", name="connect_google_check")
      *
      * @param Request $request
      */

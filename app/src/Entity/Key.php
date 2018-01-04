@@ -14,6 +14,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class Key
 {
     public const PROVIDER_FACEBOOK = 'facebook';
+    public const PROVIDER_GOOGLE = 'google';
 
     /** @ORM\ManyToOne(targetEntity="User") */
     private $user;

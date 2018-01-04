@@ -12,15 +12,15 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
-class SecurityController extends Controller
+class AuthController extends Controller
 {
     private $guardAuthenticatorHandler;
     private $userLoginFormAuthenticator;
 
-    public function __construct(GuardAuthenticatorHandler $guardAuthenticatorHandler, UserLoginFormAuthenticator $userLoginFormAuthenticator)
+    public function __construct(GuardAuthenticatorHandler $handler, UserLoginFormAuthenticator $authenticator)
     {
-        $this->guardAuthenticatorHandler = $guardAuthenticatorHandler;
-        $this->userLoginFormAuthenticator = $userLoginFormAuthenticator;
+        $this->guardAuthenticatorHandler = $handler;
+        $this->userLoginFormAuthenticator = $authenticator;
     }
 
     /**
@@ -42,11 +42,11 @@ class SecurityController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
-            // 3) Encode the password (you could also do this via Doctrine listener)
+            // Encode the password (you could also do this via Doctrine listener)
             $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
             $user->setPassword($password);
 
-            // 4) Save the user
+            // Save the user
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
@@ -76,10 +76,10 @@ class SecurityController extends Controller
      */
     public function loginAction(Request $request, AuthenticationUtils $authUtils)
     {
-        // get the login error if there is one
+        // Get the login error if there is one
         $error = $authUtils->getLastAuthenticationError();
 
-        // last username entered by the user
+        // Last username entered by the user
         $lastUsername = $authUtils->getLastUsername();
 
         return $this->render('auth/login.html.twig', array(
@@ -89,7 +89,7 @@ class SecurityController extends Controller
     }
 
     /**
-     * @Route("/login_check", name="security_login_check")
+     * @Route("/login_check", name="login_check")
      */
     public function loginCheckAction()
     {

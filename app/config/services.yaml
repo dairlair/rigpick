@@ -29,3 +29,6 @@ services:
 
     App\Security\FacebookSocialAuthenticator:
         autowire: true
+
+    App\Security\GoogleSocialAuthenticator:
+        autowire: true

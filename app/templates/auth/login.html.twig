@@ -7,7 +7,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Login</div>
                     <div class="panel-body">
-                        <form class="form-horizontal" role="form" method="POST" action="{{ path('security_login_check') }}">
+                        <form class="form-horizontal" role="form" method="POST" action="{{ path('login_check') }}">
                             {% if error %}
                                 <div class="alert alert-danger">
                                     {{ error.messageKey|trans(error.messageData) }}

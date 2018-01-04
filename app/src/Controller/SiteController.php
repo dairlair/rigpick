@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class SiteController extends Controller
 {
     /**
-     * @Route("/", name="site_index")
+     * @Route("/", name="index")
      */
     public function indexAction()
     {
@@ -17,8 +17,6 @@ class SiteController extends Controller
 
     /**
      * @Route("/profile", name="profile")
-     *
-     * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
      */
     public function profileAction()
     {
