@@ -61,7 +61,7 @@ class AuthController extends Controller
         }
 
         return $this->render(
-            'auth/register.html.twig',
+            'views/auth/register.html.twig',
             ['form' => $form->createView()]
         );
     }
@@ -82,7 +82,7 @@ class AuthController extends Controller
         // Last username entered by the user
         $lastUsername = $authUtils->getLastUsername();
 
-        return $this->render('auth/login.html.twig', array(
+        return $this->render('views/auth/login.html.twig', array(
             'last_username' => $lastUsername,
             'error'         => $error,
         ));

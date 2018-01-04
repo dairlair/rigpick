@@ -12,7 +12,7 @@ class SiteController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('site/index.html.twig');
+        return $this->render('views/site/index.html.twig');
     }
 
     /**
@@ -20,6 +20,6 @@ class SiteController extends Controller
      */
     public function profileAction()
     {
-        return $this->render('site/profile.html.twig');
+        return $this->render('views/site/profile.html.twig');
     }
 }
