@@ -2,7 +2,8 @@
 
 namespace App\Controller;
 
-use App\Form\UserType;
+use App\Form\LoginType;
+use App\Form\SignUpType;
 use App\Entity\User;
 use App\Security\UserLoginFormAuthenticator;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -36,7 +37,7 @@ class AuthController extends Controller
 
         // Build the form
         $user = new User();
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(SignUpType::class, $user);
 
         // Handle the submit (will only happen on POST)
         $form->handleRequest($request);
@@ -76,16 +77,21 @@ class AuthController extends Controller
      */
     public function loginAction(Request $request, AuthenticationUtils $authUtils)
     {
+        $form = $this->createForm(LoginType::class, null, [
+            'action' => $this->generateUrl('login_check'),
+        ]);
+
         // Get the login error if there is one
         $error = $authUtils->getLastAuthenticationError();
 
         // Last username entered by the user
         $lastUsername = $authUtils->getLastUsername();
 
-        return $this->render('views/auth/login.html.twig', array(
+        return $this->render('views/auth/login.html.twig', [
             'last_username' => $lastUsername,
-            'error'         => $error,
-        ));
+            'error' => $error,
+            'form' => $form->createView()
+        ]);
     }
 
     /**
