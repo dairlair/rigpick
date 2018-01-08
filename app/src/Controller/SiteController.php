@@ -8,10 +8,18 @@ use Symfony\Component\Routing\Annotation\Route;
 class SiteController extends Controller
 {
     /**
-     * @Route("/", name="site_index")
+     * @Route("/", name="index")
      */
     public function indexAction()
     {
-        return $this->render('site/index.html.twig');
+        return $this->render('views/site/index.html.twig');
+    }
+
+    /**
+     * @Route("/profile", name="profile")
+     */
+    public function profileAction()
+    {
+        return $this->render('views/site/profile.html.twig');
     }
 }

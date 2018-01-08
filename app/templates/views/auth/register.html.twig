@@ -1,0 +1,26 @@
+{% extends "layouts/base.html.twig" %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 offset-md-4">
+            <h3>Join us</h3>
+            {{ form_start(form) }}
+                {{ form_row(form.email) }}
+                {{ form_row(form.plainPassword) }}
+                {{ form_widget(form.submit, { 'label': 'Join', 'attr' : {'class' : 'btn-primary'} }) }}
+            {{ form_end(form) }}
+            <br>
+            <p>Or you can sign up using these services</p>
+            <div class="row">
+                {% set networks = ['facebook', 'google'] %}
+                {% for network in networks %}
+                    <div class="col-md-6">
+                        <a class="btn btn-block btn-social-{{ network }}" href="{{ path('connect_' ~ network) }}">{{ network }}</a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

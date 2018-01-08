@@ -24,5 +24,11 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+    App\Security\UserLoginFormAuthenticator:
+        arguments: ["@router", "@security.password_encoder"]
+
+    App\Security\FacebookSocialAuthenticator:
+        autowire: true
+
+    App\Security\GoogleSocialAuthenticator:
+        autowire: true
