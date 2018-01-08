@@ -3,6 +3,7 @@
 all: build
 
 build:
+	test -f .env || cp .env.example .env
 	docker-compose run --rm php-fpm bash -c 'cd /var/www/html && composer install --prefer-dist'
 	docker-compose run --rm yarn bash -c 'cd /var/www/html && yarn install && yarn run encore production'
 
