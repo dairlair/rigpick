@@ -27,7 +27,7 @@ class UserLoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
     public function getCredentials(Request $request)
     {
-        ['email' => $email, 'plainPassword' => $password] = $request->request->get('login');
+        ['email' => $email, 'plainPassword' => $password] = $request->request->get('user');
         $request->getSession()->set(Security::LAST_USERNAME, $email);
 
         return [

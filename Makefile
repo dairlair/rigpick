@@ -1,4 +1,4 @@
-.PHONY: all build run composer
+.PHONY: all build run composer test
 
 all: build
 
@@ -9,6 +9,9 @@ build:
 run:
 	docker-compose run --rm php-fpm bash -c 'bin/console doctrine:migrations:migrate --no-interaction'
 	docker-compose up
+
+test:
+	docker-compose run --rm php-fpm bash -c 'sleep 5; php bin/console doctrine:fixtures:load -n --env test && ./vendor/bin/codecept run'
 
 composer: ## Run this command to start temporary container with php and use composer and other PHP tools.
 	docker-compose run --rm php-fpm bash
