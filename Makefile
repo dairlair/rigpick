@@ -6,9 +6,9 @@ build:
 	test -f .env || cp .env.example .env
 	docker-compose run --rm php-fpm bash -c 'cd /var/www/html && composer install --prefer-dist'
 	docker-compose run --rm yarn bash -c 'cd /var/www/html && yarn install && yarn run encore production'
+	docker-compose run --rm php-fpm bash -c 'bin/console doctrine:migrations:migrate --no-interaction'
 
 run:
-	docker-compose run --rm php-fpm bash -c 'bin/console doctrine:migrations:migrate --no-interaction'
 	docker-compose up
 
 test:
