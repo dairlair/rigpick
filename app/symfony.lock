@@ -83,6 +83,9 @@
             "ref": "70062abc2cd58794d2a90274502f81b55cd9951b"
         }
     },
+    "fabpot/goutte": {
+        "version": "v3.2.2"
+    },
     "facebook/webdriver": {
         "version": "1.5.0"
     },
@@ -313,6 +316,15 @@
     },
     "symfony/lts": {
         "version": "4-dev"
+    },
+    "symfony/maker-bundle": {
+        "version": "1.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "1.0",
+            "ref": "fadbfe33303a76e25cb63401050439aa9b1a9c7f"
+        }
     },
     "symfony/monolog-bridge": {
         "version": "v4.0.2"
