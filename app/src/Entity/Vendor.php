@@ -12,8 +12,14 @@ class Vendor
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @ORM\Column(type="integer", unique=true, nullable=true)
+     */
+    private $pciSigId;
 
     /**
      * @ORM\Column(type="text", unique=true)
@@ -28,7 +34,7 @@ class Vendor
     /**
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -39,6 +45,22 @@ class Vendor
     public function setId(int $id): void
     {
         $this->id = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPciSigId()
+    {
+        return $this->pciSigId;
+    }
+
+    /**
+     * @param mixed $pciSigId
+     */
+    public function setPciSigId($pciSigId): void
+    {
+        $this->pciSigId = $pciSigId;
     }
 
     /**
