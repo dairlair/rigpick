@@ -2,10 +2,18 @@
 
 all: build
 
-build:
+build: build-prepare build-backend build-frontend apply-migrations
+
+build-prepare:
 	test -f .env || cp .env.example .env
-	docker-compose run --rm php-fpm bash -c 'cd /var/www/html && composer install --prefer-dist'
-	docker-compose run --rm yarn bash -c 'cd /var/www/html && yarn install && yarn run encore production'
+
+build-backend:
+	docker-compose run --rm php-fpm bash -c 'composer install --prefer-dist'
+
+build-frontend:
+	docker-compose run --rm yarn bash -c 'yarn install && yarn run encore production'
+
+apply-migrations:
 	docker-compose run --rm php-fpm bash -c 'bin/console doctrine:migrations:migrate --no-interaction'
 
 run:
@@ -19,3 +27,19 @@ composer: ## Run this command to start temporary container with php and use comp
 
 yarn: ## Run this command to start temporary container with php and use composer and other PHP tools.
 	docker-compose run --rm yarn bash
+
+# Checks of Continuous Integration
+.PHONY: check
+check: check-composer-validity check-composer-security check-migrations check-yaml
+
+check-composer-validity:
+	docker-compose run --rm php-fpm bash -c 'composer validate --no-check-all --strict'
+
+check-composer-security:
+	docker-compose run --rm php-fpm bash -c 'php vendor/bin/security-checker security:check'
+
+check-migrations:
+	docker-compose run --rm php-fpm bash -c 'php bin/console doctrine:schema:validate -e=prod'
+
+check-yaml:
+	docker-compose run --rm php-fpm bash -c 'php bin/console lint:yaml config'
