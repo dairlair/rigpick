@@ -1,0 +1,20 @@
+stages:
+  - check
+  - test
+
+check:
+  stage: check
+  script:
+    - make check
+
+test:
+  stage: test
+  script:
+    - make test
+
+before_script:
+    - make
+
+after_script:
+  - docker-compose down
+  - sudo chmod 777 -R *
