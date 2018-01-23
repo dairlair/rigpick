@@ -3,42 +3,16 @@
 namespace App\Command;
 
 use App\Entity\Vendor;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use GuzzleHttp\Client as GuzzleClient;
-use Goutte\Client;
 use Symfony\Component\DomCrawler\Crawler;
 
-class ScrapVendorsRegistry extends Command
+class ScrapVendorsRegistry extends ScrapCommand
 {
-    /**
-     * @var EntityManagerInterface
-     */
-    private $entityManager;
+    protected const BASE_URL = 'https://pcisig.com/membership/member-companies';
+    protected const ITEMS_CSS_SELECTOR = '#content-wrap > div > table > tbody > tr';
 
-    private $client;
-
-    const BASE_URL = 'https://pcisig.com/membership/member-companies';
-    const ITEMS_CSS_SELECTOR = '#content-wrap > div > table > tbody > tr';
-
-    public function __construct(EntityManagerInterface $entityManager)
-    {
-        parent::__construct();
-        $this->entityManager = $entityManager;
-
-        $this->client = new Client();
-        // Set for scrapper custom configured Guzzle
-        $guzzleClient = new GuzzleClient([
-            'timeout' => 60,
-            'curl' => [CURLOPT_SSL_VERIFYPEER => false],
-            'verify' => false,
-        ]);
-        $this->client->setClient($guzzleClient);
-    }
-
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('rigpick:scrap-vendors')
@@ -46,9 +20,11 @@ class ScrapVendorsRegistry extends Command
             ->setHelp('This command scrap website PCI-SIG website (https://pcisig.com/membership/member-companies).');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function work()
     {
         $this->scrap();
+        // Fix some missing values.
+        $this->save(4098, 'AMD'); // 0x1002, ATI Brand, purchased by AMD
     }
 
     private function scrap(): void
@@ -79,7 +55,7 @@ class ScrapVendorsRegistry extends Command
      */
     private function scrapUrl(string $url): bool
     {
-        $crawler = $this->client->request('GET', $url);
+        $crawler = $this->getUrl($url);
 
         $that = $this;
 
@@ -106,12 +82,12 @@ class ScrapVendorsRegistry extends Command
         $em = $this->entityManager;
 
         $vendor = $em->getRepository(Vendor::class)->findOneBy([
-            'id' => $id,
+            'pciSigId' => $id,
         ]);
 
         if (!$vendor) {
             $vendor = new Vendor();
-            $vendor->setId($id);
+            $vendor->setPciSigId($id);
         }
 
         $vendor->setName($name);
