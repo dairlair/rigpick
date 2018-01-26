@@ -6,8 +6,12 @@
                 <h1 class="jumbotron-heading">RigPick - tune your mining farm in less than a minute</h1>
                 <p class="lead text-muted">12,623 benchmarks, 15 GH/s, 2M miners</p>
                 <p>
-                    <a href="{{ path('join') }}" class="btn btn-primary">Join now</a>
-                    <a href="{{ path('login') }}" class="btn btn-secondary">Log in</a>
+                    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                        <a href="{{ path('dashboard') }}" class="btn btn-primary">Go to my dashboard</a>
+                    {% else %}
+                        <a href="{{ path('join') }}" class="btn btn-primary">Join now</a>
+                        <a href="{{ path('login') }}" class="btn btn-secondary">Log in</a>
+                    {% endif %}
                 </p>
             </div>
         </section>

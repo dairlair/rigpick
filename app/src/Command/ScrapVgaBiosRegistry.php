@@ -17,6 +17,7 @@ use Symfony\Component\DomCrawler\Crawler;
 class ScrapVgaBiosRegistry extends ScrapCommand
 {
     protected const BASE_URL = 'https://www.techpowerup.com';
+
     /**
      * This selector used to find link to each VGA BIOS from page lise that https://www.techpowerup.com/vgabios/?page=2
      */
@@ -58,13 +59,7 @@ class ScrapVgaBiosRegistry extends ScrapCommand
     {
         $url = $this->createListUrl($number);
 
-//        try {
-            return $this->scrapListUrl($url);
-//        } catch (\Exception $e) {
-//            $this->output->writeln('URL not parsed: ' . $url);
-//            $this->output->writeln($e->getMessage());
-//            return false;
-//        }
+        return $this->scrapListUrl($url);
     }
 
     /**
@@ -84,12 +79,7 @@ class ScrapVgaBiosRegistry extends ScrapCommand
         }
 
         $crawler->filter(static::LIST_PAGE_ITEM_SELECTOR)->each(function (Crawler $node) {
-//            try {
-                $this->parseItemPage(static::BASE_URL . $node->attr('href'));
-//            } catch (\Exception $e) {
-//                $this->output->writeln('URL not parsed: ' . $node->attr('href'));
-//                $this->output->writeln($e->getMessage());
-//            }
+            $this->parseItemPage(static::BASE_URL . $node->attr('href'));
         });
 
         return true;
@@ -170,6 +160,4 @@ class ScrapVgaBiosRegistry extends ScrapCommand
         $this->output->writeln('Memory usage:' . memory_get_usage(true));
         $this->urlMarker->markAsUpdated($url);
     }
-
-
 }

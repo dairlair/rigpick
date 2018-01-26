@@ -1,0 +1,17 @@
+{% extends "layouts/base.html.twig" %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 offset-md-4">
+                <h3>Add rig</h3>
+                {{ form_start(form) }}
+                {{ form_row(form.name) }}
+                {{ form_row(form.description) }}
+                {{ form_row(form.power) }}
+                {{ form_widget(form.submit, { 'label': 'Add', 'attr' : {'class' : 'btn-primary'} }) }}
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
