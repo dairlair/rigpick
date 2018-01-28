@@ -67,18 +67,18 @@ abstract class JsonApiRequestCommand extends Command
     {
         $response = $this->getUrl($url, $method, $options);
 
-        if ($this->validateResponse($response)) {
-            return $this->processResponse($response);
+        if (!$this->validateResponse($response)) {
+            return null;
         }
 
-        return null;
+        return $this->processResponse($response);
     }
 
     protected function processResponse(ResponseInterface $response)
     {
         $json = json_decode($response->getBody()->getContents(), $this->decodeJsonAsAssoc);
 
-        if ($this->validateJson($json)) {
+        if (!$this->validateJson($json)) {
             $this->onResponseProcessingFail($response);
         }
 
@@ -87,7 +87,7 @@ abstract class JsonApiRequestCommand extends Command
 
     protected function validateJson($json): bool
     {
-        return $json === null;
+        return $json !== null;
     }
 
     protected function validateResponse(ResponseInterface $response)
