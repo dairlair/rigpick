@@ -24,7 +24,6 @@ class Version20180128164347 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'postgresql', 'Migration can only be executed safely on \'postgresql\'.');
 
-        $this->addSql('CREATE SCHEMA public');
         $this->addSql('ALTER TABLE coin ALTER hashrate TYPE INT');
         $this->addSql('ALTER TABLE coin ALTER hashrate DROP DEFAULT');
     }

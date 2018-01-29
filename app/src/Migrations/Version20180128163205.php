@@ -57,7 +57,6 @@ class Version20180128163205 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'postgresql', 'Migration can only be executed safely on \'postgresql\'.');
 
-        $this->addSql('CREATE SCHEMA public');
         $this->addSql('DROP INDEX UNIQ_5569975D5E237E06');
         $this->addSql('DROP INDEX coin_unique_source_extid');
         $this->addSql('ALTER TABLE coin ADD external_id INT NOT NULL');

@@ -43,7 +43,7 @@ class ScrapCoins extends JsonApiRequestCommand
             } catch (RequestException $exception) {
                 if ($exception->getCode() == 403) {
                     $forbiddenCount++;
-                    echo 'forbidden count: ' . $forbiddenCount . "\n";
+                    $this->output->writeln('forbidden count: ' . $forbiddenCount);
                     if ($forbiddenCount > static::FORBIDDEN_RESPONSE_LIMIT) {
                         echo $exception->getMessage();
                         return;
@@ -51,8 +51,8 @@ class ScrapCoins extends JsonApiRequestCommand
                 }
             }
             $i++;
-            if($i>static::MAX_ID){
-                echo "done\n";
+            if ($i > static::MAX_ID) {
+                $this->output->writeln('done');
                 return;
             }
             usleep(static::PARSE_INTERVAL);
@@ -181,7 +181,7 @@ class ScrapCoins extends JsonApiRequestCommand
     {
         $em = $this->entityManager;
         if ($coin->getId() < 1) {
-            echo '+' . $coin->getTicker() . "\n";
+            $this->output->writeln('+' . $coin->getTicker());
         }
         $em->persist($coin);
         $em->flush();
@@ -191,7 +191,7 @@ class ScrapCoins extends JsonApiRequestCommand
     {
         $em = $this->entityManager;
         if ($algorithm->getId() < 1) {
-            echo '+algo ' . $algorithm->getTicker() . "\n";
+            $this->output->writeln('+algo ' . $algorithm->getTicker());
         }
         $em->persist($algorithm);
         $em->flush();
