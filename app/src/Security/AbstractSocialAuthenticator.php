@@ -110,7 +110,7 @@ abstract class AbstractSocialAuthenticator extends SocialAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
-        $url = $this->router->generate('profile');
+        $url = $this->router->generate('dashboard');
 
         return new RedirectResponse($url);
     }

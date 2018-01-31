@@ -11,8 +11,8 @@ class AuthCest
         $I->fillField(['name' => 'user[email]'], 'user0@gmail.com');
         $I->fillField(['name' => 'user[plainPassword]'], 'pass_1234');
         $I->click('', '#user_submit');
-        $I->seeCurrentUrlEquals('/profile');
-        $I->see('Profile', 'main');
+        $I->seeCurrentUrlEquals('/dashboard');
+        $I->see('Dashboard', 'h1');
     }
 
     public function trySignUp (FunctionalTester $I) : void
@@ -22,7 +22,7 @@ class AuthCest
         $I->fillField(['name' => 'user[email]'], 'test.sign.up.1@gmail.com');
         $I->fillField(['name' => 'user[plainPassword]'], 'qwerty');
         $I->click('', '#user_submit');
-        $I->seeCurrentUrlEquals('/profile');
-        $I->see('Profile', 'main');
+        $I->seeCurrentUrlEquals('/dashboard');
+        $I->see('Dashboard', 'h1');
     }
 }

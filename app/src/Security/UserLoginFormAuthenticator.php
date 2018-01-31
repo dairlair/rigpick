@@ -55,7 +55,7 @@ class UserLoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
-        $url = $this->router->generate('profile');
+        $url = $this->router->generate('dashboard');
 
         return new RedirectResponse($url);
     }
@@ -76,7 +76,7 @@ class UserLoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
     protected function getDefaultSuccessRedirectUrl()
     {
-        return $this->router->generate('profile');
+        return $this->router->generate('dashboard');
     }
 
     public function supports(Request $request)

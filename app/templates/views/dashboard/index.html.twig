@@ -1,0 +1,9 @@
+{% extends "layouts/base.html.twig" %}
+
+{% block content %}
+    <h1>Dashboard</h1>
+    <p>Here you can see your rigs, statistic, and personal recommendations</p>
+    <p>
+        <a href="{{ path('dashboard_rigs_add') }}" class="btn btn-primary">Add your rig</a>
+    </p>
+{% endblock %}

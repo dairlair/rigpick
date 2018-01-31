@@ -1,0 +1,177 @@
+<?php declare(strict_types = 1);
+
+namespace App\Entity;
+
+use DateTime;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * @ORM\Entity(repositoryClass="App\Repository\RigRepository")
+ * @ORM\Table(name="rigs", uniqueConstraints={
+ *     @ORM\UniqueConstraint(name="rigs_unique_hash", columns={"hash"}),
+ *     @ORM\UniqueConstraint(name="rigs_unique_name", columns={"name"})
+ * })
+ */
+class Rig
+{
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(type="bigint")
+     * @var integer
+     */
+    private $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User")
+     * @Assert\NotBlank()
+     * @var User
+     */
+    private $user;
+
+    /**
+     * @ORM\Column(type="text")
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min = 6,
+     *      max = 6,
+     *      minMessage = "Hash must be at least {{ limit }} characters long",
+     *      maxMessage = "Hash cannot be longer than {{ limit }} characters"
+     * )
+     * @var string
+     */
+    private $hash;
+
+    /**
+     * @ORM\Column(type="text")
+     * @Assert\NotBlank()
+     * @Assert\Length(min = 4,max = 40)
+     * @var string
+     */
+    private $name;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     * @Assert\Length(max = 16384)
+     * @var string
+     */
+    private $description;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @var integer
+     */
+    private $power;
+
+    /**
+     * @ORM\Column(type="datetime")
+     * @Assert\NotBlank()
+     * @var DateTime
+     */
+    private $createdAt;
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param User $user
+     */
+    public function setUser(User $user)
+    {
+        $this->user = $user;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getHash(): ?string
+    {
+        return $this->hash;
+    }
+
+    /**
+     * @param string $hash
+     */
+    public function setHash(string $hash)
+    {
+        $this->hash = $hash;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName(string $name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setDescription(string $description)
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getPower(): ?int
+    {
+        return $this->power;
+    }
+
+    /**
+     * @param int $power
+     */
+    public function setPower(int $power)
+    {
+        $this->power = $power;
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param DateTime $createdAt
+     */
+    public function setCreatedAt(DateTime $createdAt)
+    {
+        $this->createdAt = $createdAt;
+    }
+}
