@@ -19,6 +19,7 @@ class VgaBios
 
     /**
      * @ORM\ManyToOne(targetEntity="GraphicCardModel")
+     * @var GraphicCardModel
      */
     private $model;
 
@@ -74,17 +75,17 @@ class VgaBios
     }
 
     /**
-     * @return mixed
+     * @return GraphicCardModel
      */
-    public function getModel()
+    public function getModel(): GraphicCardModel
     {
         return $this->model;
     }
 
     /**
-     * @param mixed $model
+     * @param $model
      */
-    public function setModel($model): void
+    public function setModel(GraphicCardModel $model): void
     {
         $this->model = $model;
     }
@@ -199,5 +200,18 @@ class VgaBios
     public function setMemoryType(string $memoryType): void
     {
         $this->memoryType = $memoryType;
+    }
+
+    public function getFullName(): string
+    {
+        $parts = [
+            $this->getModel()->getVendor()->getName(),
+            $this->getModel()->getName(),
+            $this->getModel()->getSeries()->getName(),
+        ];
+        $parts = array_filter($parts, function ($value) {
+            return $value;
+        });
+        return implode(' ', $parts);
     }
 }

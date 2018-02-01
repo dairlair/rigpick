@@ -1,4 +1,4 @@
-.PHONY: all build run composer test
+.PHONY: all build run composer test check
 
 all: build
 
@@ -20,7 +20,7 @@ run:
 	docker-compose up
 
 test:
-	docker-compose run --rm php-fpm bash -c 'sleep 5; php bin/console doctrine:fixtures:load -n --env test && ./vendor/bin/codecept run'
+	docker-compose run --rm php-fpm bash -c 'sleep 5; php bin/console doctrine:fixtures:load -n --append --env test && ./vendor/bin/codecept run'
 
 composer: ## Run this command to start temporary container with php and use composer and other PHP tools.
 	docker-compose run --rm php-fpm bash
@@ -29,7 +29,6 @@ yarn: ## Run this command to start temporary container with php and use composer
 	docker-compose run --rm yarn bash
 
 # Checks of Continuous Integration
-.PHONY: check
 check: check-composer-validity check-composer-security check-migrations check-yaml
 
 check-composer-validity:
