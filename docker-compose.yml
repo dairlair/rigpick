@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 
 services:
   nginx:
@@ -20,12 +20,14 @@ services:
           - "rigpick.local"
 
   php-fpm:
-    extends:
-      file: docker-common-services.yml
-      service: php-fpm
     build: ./docker/php-fpm
+    command: /bin/bash -c 'php-fpm'
+    volumes:
+        - "./app:/var/www/html"
+        - "./docker/data/php-fpm/root/.composer/auth.json:/root/.composer/auth.json"
     links:
       - postgres
+    image: registry.gitlab.com/rigpick/website/php-fpm
 
   postgres:
     image: postgres:9.6
@@ -42,6 +44,6 @@ services:
 
   yarn:
     image: kkarczmarczyk/node-yarn:8.0
-    volumes_from:
-      - php-fpm
+    volumes:
+        - "./app:/var/www/html"
     working_dir: '/var/www/html'

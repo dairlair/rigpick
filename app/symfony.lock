@@ -5,6 +5,9 @@
     "codeception/codeception": {
         "version": "2.3.7"
     },
+    "codeception/stub": {
+        "version": "1.0.1"
+    },
     "composer/ca-bundle": {
         "version": "1.1.0"
     },
@@ -130,6 +133,9 @@
     },
     "ocramius/proxy-manager": {
         "version": "2.2.0"
+    },
+    "pagerfanta/pagerfanta": {
+        "version": "v1.0.5"
     },
     "paragonie/random_compat": {
         "version": "v2.0.11"
@@ -463,6 +469,9 @@
     },
     "webmozart/assert": {
         "version": "1.2.0"
+    },
+    "white-october/pagerfanta-bundle": {
+        "version": "v1.1.2"
     },
     "zendframework/zend-code": {
         "version": "3.3.0"

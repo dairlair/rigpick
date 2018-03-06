@@ -6,24 +6,27 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
+                <li class="nav-item {{ app.request.get('_route') == 'index' ? 'active' }}">
                     <a class="nav-link" href="{{ path('index') }}">Home</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{ app.request.get('_route') == 'rigs' ? 'active' }}">
                     <a class="nav-link" href="#">Rigs</a>
+                </li>
+                <li class="nav-item {{ app.request.get('_route') == 'graphic_cards' ? 'active' }}">
+                    <a class="nav-link" href="{{ path('graphic_cards') }}">Graphic cards</a>
                 </li>
             </ul>
 
             <ul class="navbar-nav">
                 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                    <li class="nav-item">
+                    <li class="nav-item {{ app.request.get('_route') == 'dashboard' ? 'active' }}">
                         <a class="nav-link" href="{{ path('dashboard') }}">Dashboard</a>
                     </li>
                 {% else %}
-                <li class="nav-item">
+                <li class="nav-item {{ app.request.get('_route') == 'login' ? 'active' }}">
                     <a class="nav-link" href="{{ path('login') }}">Log in</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{ app.request.get('_route') == 'join' ? 'active' }}">
                     <a class="nav-link" href="{{ path('join') }}">Join</a>
                 </li>
                 {%  endif %}

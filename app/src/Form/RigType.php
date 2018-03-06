@@ -17,7 +17,9 @@ class RigType extends AbstractType
         $builder
             ->add('name', TextType::class)
             ->add('description', TextType::class)
-            ->add('power', IntegerType::class)
+            ->add('power', IntegerType::class, [
+                'required' => false,
+            ])
             ->add('submit', SubmitType::class)
         ;
     }

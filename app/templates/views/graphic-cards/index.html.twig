@@ -1,0 +1,18 @@
+{% extends "layouts/base.html.twig" %}
+
+{% block content %}
+    {% for card in cards %}
+        <article class="graphic-card">
+            <h5>{{ card.modelVendorName }}</h5>
+            <p>{{ card.seriesVendorName }} {{ card.seriesName }} {{ card.modelName }}</p>
+        </article>
+    {% else %}
+        <div class="well">{{ 'cards.no_cards_found'|trans }}</div>
+    {% endfor %}
+
+    {% if cards.haveToPaginate %}
+        <div class="navigation text-center">
+            {{ pagerfanta(cards, 'twitter_bootstrap4', {routeName: 'graphic_cards'}) }}
+        </div>
+    {% endif %}
+{% endblock %}

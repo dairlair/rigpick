@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -72,17 +73,29 @@ class Rig
     private $createdAt;
 
     /**
+     * One Rig have many RigGpu.
+     * @ORM\OneToMany(targetEntity="RigGpu", mappedBy="rig")
+     * @var array
+     */
+    private $gpus;
+
+    public function __construct()
+    {
+        $this->gpus = new ArrayCollection();
+    }
+
+    /**
      * @return int
      */
-    public function getId()
+    public function getId(): ?int
     {
-        return $this->id;
+        return $this->id ? (int) $this->id : null;
     }
 
     /**
      * @return User
      */
-    public function getUser()
+    public function getUser(): ?User
     {
         return $this->user;
     }
@@ -90,7 +103,7 @@ class Rig
     /**
      * @param User $user
      */
-    public function setUser(User $user)
+    public function setUser(User $user): void
     {
         $this->user = $user;
     }
@@ -106,7 +119,7 @@ class Rig
     /**
      * @param string $hash
      */
-    public function setHash(string $hash)
+    public function setHash(string $hash): void
     {
         $this->hash = $hash;
     }
@@ -122,7 +135,7 @@ class Rig
     /**
      * @param string $name
      */
-    public function setName(string $name)
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
@@ -138,7 +151,7 @@ class Rig
     /**
      * @param string $description
      */
-    public function setDescription(string $description)
+    public function setDescription(string $description): void
     {
         $this->description = $description;
     }
@@ -154,7 +167,7 @@ class Rig
     /**
      * @param int $power
      */
-    public function setPower(int $power)
+    public function setPower(int $power): void
     {
         $this->power = $power;
     }
@@ -162,7 +175,7 @@ class Rig
     /**
      * @return DateTime
      */
-    public function getCreatedAt()
+    public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
     }
@@ -170,8 +183,13 @@ class Rig
     /**
      * @param DateTime $createdAt
      */
-    public function setCreatedAt(DateTime $createdAt)
+    public function setCreatedAt(DateTime $createdAt): void
     {
         $this->createdAt = $createdAt;
+    }
+
+    public function getGpus()
+    {
+        return $this->gpus;
     }
 }

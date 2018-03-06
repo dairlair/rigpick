@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Rig;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -13,16 +14,16 @@ class RigRepository extends ServiceEntityRepository
         parent::__construct($registry, Rig::class);
     }
 
-    /*
-    public function findBySomething($value)
+    public function findByUserWithGpus(User $user)
     {
-        return $this->createQueryBuilder('r')
-            ->where('r.something = :value')->setParameter('value', $value)
-            ->orderBy('r.id', 'ASC')
-            ->setMaxResults(10)
+        $query = $this->createQueryBuilder('r')
+            ->leftJoin('r.gpus', 'c')
+            ->addSelect('c')
+            ->andWhere('r.user = :user')
+            ->setParameter('user', $user)
             ->getQuery()
-            ->getResult()
         ;
+
+        return $query->getResult();
     }
-    */
 }

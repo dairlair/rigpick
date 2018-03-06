@@ -32,3 +32,8 @@ services:
 
     App\Security\GoogleSocialAuthenticator:
         autowire: true
+
+    ignore_tables_listener (with dependencies if needed):
+        class: App\EventListener\IgnoreTablesListener
+        tags:
+        - {name: doctrine.event_listener, event: postGenerateSchema }

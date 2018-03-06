@@ -22,7 +22,8 @@
         "symfony/twig-bundle": "^4.0",
         "symfony/validator": "^4.0",
         "symfony/yaml": "^4.0",
-        "vlucas/phpdotenv": "^2.4"
+        "vlucas/phpdotenv": "^2.4",
+        "white-october/pagerfanta-bundle": "^1.1"
     },
     "require-dev": {
         "codeception/codeception": "^2.3",

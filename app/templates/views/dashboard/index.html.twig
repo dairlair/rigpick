@@ -2,8 +2,12 @@
 
 {% block content %}
     <h1>Dashboard</h1>
-    <p>Here you can see your rigs, statistic, and personal recommendations</p>
-    <p>
-        <a href="{{ path('dashboard_rigs_add') }}" class="btn btn-primary">Add your rig</a>
-    </p>
+    <div class="row">
+        <div class="col">
+            <h2>Your rigs <a href="{{ path('dashboard_rigs_add') }}" class="btn btn-primary">Add your rig</a></h2>
+            {{ include('views/dashboard/_rigs.html.twig', {'rigs': rigs}) }}
+        </div>
+        <div class="col">
+        </div>
+    </div>
 {% endblock %}
