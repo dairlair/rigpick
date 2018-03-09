@@ -5,6 +5,7 @@ stages:
 check:
   stage: check
   script:
+    - cat app/.env
     - make check
 
 test:
@@ -13,7 +14,8 @@ test:
     - make test
 
 before_script:
-    - make
+  - echo DATABASE_URL=pgsql://rigpickuser:anyPassword@postgres/rigpickdb >> app/.env
+  - make
 
 after_script:
   - docker-compose down
