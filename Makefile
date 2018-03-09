@@ -38,7 +38,7 @@ check-composer-security:
 	docker-compose run --rm php-fpm bash -c 'php vendor/bin/security-checker security:check'
 
 check-migrations:
-	docker-compose run --rm php-fpm bash -c 'php bin/console doctrine:schema:validate -e=prod'
+	docker-compose run --rm php-fpm bash -c 'php bin/console doctrine:schema:validate -e prod'
 
 check-yaml:
 	docker-compose run --rm php-fpm bash -c 'php bin/console lint:yaml config'
