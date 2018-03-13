@@ -1,0 +1,28 @@
+{% extends "layouts/base.html.twig" %}
+
+{% block content %}
+    <article>
+    <h1>{{ coin.name }} ({{ coin.ticker }}) — cryptocurrency statement</h1>
+    {% if coin.description %}
+        <p>{{ coin.description }}</p>
+    {% endif %}
+    <table class="table">
+        <tbody>
+            <tr>
+                <td>
+                    Market Capitalization<br>
+                    <small>Market value of all mined or purchased {{ coin.name }} coins</small>
+                </td>
+                <td><strong>{{ coin.marketCapUsd }}</strong></td>
+            </tr>
+            <tr>
+                <td>
+                    Exchange rate {{ coin.name }} to Bitcoin<br>
+                    <small>Current rate for {{ coin.ticker }}/BTC from the biggest exchanges</small>
+                </td>
+                <td><strong>{{ coin.exchangeRate }}</strong></td>
+            </tr>
+        </tbody>
+    </table>
+    </article>
+{% endblock %}

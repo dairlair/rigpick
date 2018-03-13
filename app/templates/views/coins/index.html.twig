@@ -1,0 +1,41 @@
+{% extends "layouts/base.html.twig" %}
+
+{% block content %}
+
+    {% if (coins) %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Ticker</th>
+                    <th>Block reward</th>
+                    <th>Difficulty</th>
+                    <th>Last update</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for coin in coins %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('coin', {'ticker': coin.ticker|lower}) }}" class="card-link">
+                                {{ coin.name }}
+                            </a>
+                        </td>
+                        <td>{{ coin.ticker }}</td>
+                        <td>{{ coin.blockReward }}</td>
+                        <td>{{ coin.difficulty }}</td>
+                        <td>{{ coin.syncedAt|date('Y-m-d') }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class="well">{{ 'coins.no_coins_found'|trans }}</div>
+    {% endif %}
+
+    {% if coins.haveToPaginate %}
+        <div class="navigation text-center">
+            {{ pagerfanta(coins, 'twitter_bootstrap4', {routeName: 'coins'}) }}
+        </div>
+    {% endif %}
+{% endblock %}

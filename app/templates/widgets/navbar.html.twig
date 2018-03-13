@@ -9,14 +9,13 @@
                 <li class="nav-item {{ app.request.get('_route') == 'index' ? 'active' }}">
                     <a class="nav-link" href="{{ path('index') }}">Home</a>
                 </li>
-                <li class="nav-item {{ app.request.get('_route') == 'rigs' ? 'active' }}">
-                    <a class="nav-link" href="#">Rigs</a>
-                </li>
                 <li class="nav-item {{ app.request.get('_route') == 'graphic_cards' ? 'active' }}">
                     <a class="nav-link" href="{{ path('graphic_cards') }}">Graphic cards</a>
                 </li>
+                <li class="nav-item {{ app.request.get('_route') == 'coins' ? 'active' }}">
+                    <a class="nav-link" href="{{ path('coins') }}">Coins</a>
+                </li>
             </ul>
-
             <ul class="navbar-nav">
                 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                     <li class="nav-item {{ app.request.get('_route') == 'dashboard' ? 'active' }}">

@@ -9,6 +9,8 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
 
 class CoinRepository extends ServiceEntityRepository
 {
+    use RepositoryTrait;
+
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Coin::class);
@@ -38,5 +40,15 @@ class CoinRepository extends ServiceEntityRepository
         }
 
         return $coin;
+    }
+
+    public function findByTicker(string $ticker): ?Coin
+    {
+        $query = $this->createQueryBuilder('c')
+                      ->andWhere('LOWER(c.ticker) = :ticker')
+                      ->setParameter('ticker', strtolower($ticker))
+                      ->getQuery();
+
+        return $query->getSingleResult();
     }
 }
