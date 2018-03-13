@@ -62,37 +62,37 @@ class Coin
      * @ORM\Column(type="float", nullable=true)
      *
      */
-    private $block_time;
+    private $blockTime;
 
     /**
      * @ORM\Column(type="float", nullable=true)
      *
      */
-    private $block_reward;
+    private $blockReward;
 
     /**
      * @ORM\Column(type="float", nullable=true)
      *
      */
-    private $block_reward24;
+    private $blockReward24;
 
     /**
      * @ORM\Column(type="float", nullable=true)
      *
      */
-    private $block_reward3;
+    private $blockReward3;
 
     /**
      * @ORM\Column(type="float", nullable=true)
      *
      */
-    private $block_reward7;
+    private $blockReward7;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      *
      */
-    private $last_block;
+    private $lastBlock;
 
     /**
      * @ORM\Column(type="float", nullable=true)
@@ -123,39 +123,39 @@ class Coin
      * @ORM\Column(type="float", nullable=true)
      *
      */
-    private $exchange_rate;
+    private $exchangeRate;
     /**
      * @ORM\Column(type="float", nullable=true)
      *
      */
-    private $exchange_rate24;
+    private $exchangeRate24;
     /**
      * @ORM\Column(type="float", nullable=true)
      *
      */
-    private $exchange_rate3;
+    private $exchangeRate3;
     /**
      * @ORM\Column(type="float", nullable=true)
      *
      */
-    private $exchange_rate7;
+    private $exchangeRate7;
     /**
      * @ORM\Column(type="text", nullable=true)
      *
      */
-    private $exchange_rate_curr;
+    private $exchangeRateCurr;
     /**
      * @ORM\Column(type="float", nullable=true)
      *
      */
-    private $exchange_rate_vol;
+    private $exchangeRateVol;
 
     /**
      * Market cap in usd
      * @ORM\Column(type="float", nullable=true)
      *
      */
-    private $market_cap_usd;
+    private $marketCapUsd;
 
     /**
      * @ORM\Column(type="boolean")
@@ -249,9 +249,9 @@ class Coin
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -285,7 +285,7 @@ class Coin
      */
     public function getBlockTime(): int
     {
-        return $this->block_time;
+        return $this->blockTime;
     }
 
     /**
@@ -293,7 +293,7 @@ class Coin
      */
     public function setBlockTime(int $time): void
     {
-        $this->block_time = $time;
+        $this->blockTime = $time;
     }
 
     /**
@@ -301,7 +301,7 @@ class Coin
      */
     public function getBlockReward(): float
     {
-        return $this->block_reward;
+        return $this->blockReward;
     }
 
     /**
@@ -309,7 +309,7 @@ class Coin
      */
     public function setBlockReward(float $reward): void
     {
-        $this->block_reward = $reward;
+        $this->blockReward = $reward;
     }
 
     /**
@@ -317,7 +317,7 @@ class Coin
      */
     public function getBlockReward24(): float
     {
-        return $this->block_reward24;
+        return $this->blockReward24;
     }
 
     /**
@@ -325,7 +325,7 @@ class Coin
      */
     public function setBlockReward24(float $reward): void
     {
-        $this->block_reward24 = $reward;
+        $this->blockReward24 = $reward;
     }
 
     /**
@@ -333,7 +333,7 @@ class Coin
      */
     public function getBlockReward3(): float
     {
-        return $this->block_reward3;
+        return $this->blockReward3;
     }
 
     /**
@@ -341,7 +341,7 @@ class Coin
      */
     public function setBlockReward3(float $reward): void
     {
-        $this->block_reward3 = $reward;
+        $this->blockReward3 = $reward;
     }
 
     /**
@@ -349,7 +349,7 @@ class Coin
      */
     public function getBlockReward7(): float
     {
-        return $this->block_reward7;
+        return $this->blockReward7;
     }
 
     /**
@@ -357,7 +357,7 @@ class Coin
      */
     public function setBlockReward7(float $reward): void
     {
-        $this->block_reward7 = $reward;
+        $this->blockReward7 = $reward;
     }
 
     /**
@@ -365,7 +365,7 @@ class Coin
      */
     public function getLastBlock(): int
     {
-        return $this->last_block;
+        return $this->lastBlock;
     }
 
     /**
@@ -373,7 +373,7 @@ class Coin
      */
     public function setLastBlock(int $lastBlock): void
     {
-        $this->last_block = $lastBlock;
+        $this->lastBlock = $lastBlock;
     }
 
     /**
@@ -445,7 +445,7 @@ class Coin
      */
     public function getExchangeRate(): float
     {
-        return $this->exchange_rate;
+        return $this->exchangeRate;
     }
 
     /**
@@ -453,7 +453,7 @@ class Coin
      */
     public function setExchangeRate(float $rate): void
     {
-        $this->exchange_rate = $rate;
+        $this->exchangeRate = $rate;
     }
 
     /**
@@ -461,7 +461,7 @@ class Coin
      */
     public function getExchangeRate24(): float
     {
-        return $this->exchange_rate24;
+        return $this->exchangeRate24;
     }
 
     /**
@@ -469,7 +469,7 @@ class Coin
      */
     public function setExchangeRate24(float $rate): void
     {
-        $this->exchange_rate24 = $rate;
+        $this->exchangeRate24 = $rate;
     }
 
     /**
@@ -477,7 +477,7 @@ class Coin
      */
     public function getExchangeRate3(): float
     {
-        return $this->exchange_rate3;
+        return $this->exchangeRate3;
     }
 
     /**
@@ -485,7 +485,7 @@ class Coin
      */
     public function setExchangeRate3(float $rate): void
     {
-        $this->exchange_rate3 = $rate;
+        $this->exchangeRate3 = $rate;
     }
 
     /**
@@ -493,7 +493,7 @@ class Coin
      */
     public function getExchangeRate7(): float
     {
-        return $this->exchange_rate7;
+        return $this->exchangeRate7;
     }
 
     /**
@@ -501,7 +501,7 @@ class Coin
      */
     public function setExchangeRate7(float $rate): void
     {
-        $this->exchange_rate7 = $rate;
+        $this->exchangeRate7 = $rate;
     }
 
     /**
@@ -509,7 +509,7 @@ class Coin
      */
     public function getExchangeRateCurr(): string
     {
-        return $this->exchange_rate_curr;
+        return $this->exchangeRateCurr;
     }
 
     /**
@@ -517,7 +517,7 @@ class Coin
      */
     public function setExchangeRateCurr(string $currency): void
     {
-        $this->exchange_rate_curr = $currency;
+        $this->exchangeRateCurr = $currency;
     }
 
     /**
@@ -525,7 +525,7 @@ class Coin
      */
     public function getExchangeRateVol(): float
     {
-        return $this->exchange_rate_vol;
+        return $this->exchangeRateVol;
     }
 
     /**
@@ -533,7 +533,7 @@ class Coin
      */
     public function setExchangeRateVol(float $volume): void
     {
-        $this->exchange_rate_vol = $volume;
+        $this->exchangeRateVol = $volume;
     }
 
     /**
@@ -541,7 +541,7 @@ class Coin
      */
     public function getMarketCapUsd(): float
     {
-        return $this->market_cap_usd;
+        return $this->marketCapUsd;
     }
 
     /**
@@ -549,7 +549,7 @@ class Coin
      */
     public function setMarketCapUsd(float $amount): void
     {
-        $this->market_cap_usd = $amount;
+        $this->marketCapUsd = $amount;
     }
 
     /**
