@@ -1,6 +1,7 @@
 stages:
   - check
   - test
+  - deploy
 
 check:
   stage: check
@@ -20,3 +21,14 @@ before_script:
 after_script:
   - docker-compose down
   - sudo chmod 777 -R *
+
+deploy_production:
+  stage: deploy
+  script:
+    - echo Deploy to production server
+    - ssh -t `echo $PRODUCTION_SSH_CREDENTIALS` 'cd '`echo $PRODUCTION_PROJECT_PATH`' && git reset --hard && git pull && cd app && sudo chmod 777 -R var && composer install --no-dev --optimize-autoloader && sudo php bin/console cache:clear --env=prod --no-debug && sudo php bin/console cache:warmup --env=prod --no-debug && sudo chmod 777 -R var && php bin/console --no-interaction doctrine:migrations:migrate && sudo service php7.2-fpm restart'
+
+  environment:
+    name: production
+  only:
+  - master
