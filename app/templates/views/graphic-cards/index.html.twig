@@ -1,10 +1,11 @@
 {% extends "layouts/base.html.twig" %}
 
 {% block content %}
+    <h1>Mining Graphic Cards Rating</h1>
     {% for card in cards %}
         <article class="graphic-card">
             <h5>{{ card.modelVendorName }}</h5>
-            <p>{{ card.seriesVendorName }} {{ card.seriesName }} {{ card.modelName }}</p>
+            <a href="{{ path('graphic_card', {id: card.vgaBiosId, slug: card.slug}) }}">{{ card.seriesVendorName }} {{ card.seriesName }} {{ card.modelName }}</a>
         </article>
     {% else %}
         <div class="well">{{ 'cards.no_cards_found'|trans }}</div>
