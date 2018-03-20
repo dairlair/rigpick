@@ -14,13 +14,13 @@ build-frontend:
 	docker-compose run --rm yarn bash -c 'yarn install && yarn run encore production'
 
 apply-migrations:
-	docker-compose run --rm php-fpm bash -c 'bin/console doctrine:migrations:migrate --no-interaction'
+	docker-compose run --rm php-fpm bash -c 'bin/console doctrine:migrations:migrate -n'
 
 run:
 	docker-compose up
 
 test:
-	docker-compose run --rm php-fpm bash -c 'sleep 5; php bin/console doctrine:fixtures:load -n --append --env test && ./vendor/bin/codecept run'
+	docker-compose run --rm php-fpm bash -c 'sleep 5; php bin/console doctrine:m:m -n --env test && php bin/console doctrine:fixtures:load --append -n --env test && php bin/console rigpick:mat-view --env=test && ./vendor/bin/codecept run'
 
 composer: ## Run this command to start temporary container with php and use composer and other PHP tools.
 	docker-compose run --rm php-fpm bash

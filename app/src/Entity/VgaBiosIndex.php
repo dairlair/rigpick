@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\Helpers\UnitsHelper;
+use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -21,32 +23,38 @@ class VgaBiosIndex
      * @ORM\Column(type="string")
      * @var string
      */
-    private $model_vendor_name;
+    private $modelVendorName;
 
     /**
      * @ORM\Column(type="string")
      * @var string
      */
-    private $series_vendor_name;
+    private $seriesVendorName;
 
     /**
      * @ORM\Column(type="string")
      * @var string
      */
-    private $model_name;
+    private $modelName;
 
     /**
      * @ORM\Column(type="string")
      * @var string
      */
-    private $series_name;
+    private $seriesName;
+
+    /**
+     * @ORM\Column(type="integer")
+     * @var integer
+     */
+    private $memorySize;
 
     /**
      * @return string
      */
     public function getModelVendorName(): string
     {
-        return $this->model_vendor_name;
+        return $this->modelVendorName;
     }
 
     /**
@@ -54,7 +62,7 @@ class VgaBiosIndex
      */
     public function getSeriesVendorName(): string
     {
-        return $this->series_vendor_name;
+        return $this->seriesVendorName;
     }
 
     /**
@@ -62,7 +70,7 @@ class VgaBiosIndex
      */
     public function getModelName(): string
     {
-        return $this->model_name;
+        return $this->modelName;
     }
 
     /**
@@ -70,15 +78,30 @@ class VgaBiosIndex
      */
     public function getSeriesName(): string
     {
-        return $this->series_name;
+        return $this->seriesName;
     }
 
     /**
      * @return int
      */
-    public function getId(): int
+    public function getVgaBiosId(): int
     {
         return $this->id;
+    }
+
+    public function getMemorySize(): ?int
+    {
+        return $this->memorySize;
+    }
+
+
+    public function getMemorySizeString(): ?string
+    {
+        if ($this->getMemorySize() === null) {
+            return null;
+        }
+
+        return UnitsHelper::formatBytes($this->getMemorySize());
     }
 
     public function getFullName(): string
@@ -87,10 +110,17 @@ class VgaBiosIndex
             $this->getModelVendorName(),
             $this->getModelName(),
             $this->getSeriesName(),
+            $this->getMemorySizeString()
         ];
         $parts = array_filter($parts, function ($value) {
             return $value;
         });
         return implode(' ', $parts);
+    }
+
+    public function getSlug(): string
+    {
+        $slugify = new Slugify();
+        return $slugify->slugify($this->getFullName());
     }
 }

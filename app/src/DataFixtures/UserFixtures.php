@@ -18,7 +18,7 @@ class UserFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-        // Create 20 users! Bam!
+        // Create 20 users!
         for ($i = 0; $i < 20; $i++) {
             $email = 'user' . $i . '@gmail.com';
             $user = $manager->getRepository(User::class)->findBy(['email' => $email]);

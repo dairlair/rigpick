@@ -32,7 +32,7 @@ class RigGpuType extends AbstractType
         $vgaBiosIndexList = $this->vgaBiosIndexRepository->findAll();
         $vgaBiosIndexMap = [];
         foreach ($vgaBiosIndexList as $vgaBiosIndex) {
-            $vgaBiosIndexMap[$vgaBiosIndex->getId()] = $vgaBiosIndex;
+            $vgaBiosIndexMap[$vgaBiosIndex->getVgaBiosId()] = $vgaBiosIndex;
         }
         $vgaBiosList = $this->vgaBiosRepository->findAll();
 

@@ -2,6 +2,9 @@
     "behat/gherkin": {
         "version": "v4.5.1"
     },
+    "cocur/slugify": {
+        "version": "v3.1"
+    },
     "codeception/codeception": {
         "version": "2.4.0"
     },
