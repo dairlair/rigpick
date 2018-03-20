@@ -48,9 +48,9 @@ class Vendor
     }
 
     /**
-     * @return mixed
+     * @return int|null
      */
-    public function getPciSigId()
+    public function getPciSigId(): ?int
     {
         return $this->pciSigId;
     }
@@ -64,9 +64,9 @@ class Vendor
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -80,9 +80,9 @@ class Vendor
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBrand(): string
+    public function getBrand(): ?string
     {
         return $this->brand;
     }

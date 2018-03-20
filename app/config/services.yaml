@@ -37,3 +37,10 @@ services:
         class: App\EventListener\IgnoreTablesListener
         tags:
         - {name: doctrine.event_listener, event: postGenerateSchema }
+
+    admin.vendor:
+            class: App\Admin\VendorAdmin
+            arguments: [~, App\Entity\Vendor, ~]
+            tags:
+                - { name: sonata.admin, manager_type: orm, label: Vendor }
+            public: false

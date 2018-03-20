@@ -100,9 +100,14 @@ class User implements UserInterface
     }
 
     // other methods, including security methods like getRoles()
-    public function getRoles()
+    public function getRoles(): array
     {
-        return ['ROLE_USER'];
+        $roles = ['ROLE_USER'];
+        if ($this->getEmail() === 'alexander.zyryanov@gmail.com') {
+            $roles[] = 'ROLE_ADMIN';
+        }
+
+        return $roles;
     }
 
     public function eraseCredentials()
