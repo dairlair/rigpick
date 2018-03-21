@@ -30,3 +30,4 @@ security:
 
     access_control:
       - { path: ^/dashboard, roles: IS_AUTHENTICATED_REMEMBERED }
+      - { path: ^/admin, roles: ROLE_ADMIN }
